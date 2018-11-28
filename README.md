@@ -44,3 +44,43 @@ This project uses the following packages:
 - Turtlebot ROS packages
 - Hector_slam packages
 - Ubuntu 16.04
+
+# Algorithm Overview 
+This part will be updated in future 
+# Build Instructions
+To run follow the following commands 
+```
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/
+catkin_make
+source devel/setup.bash
+cd src/
+git clone --recursive https://github.com/saimouli/frontier_exploration_turtlebot.git
+cd ..
+catkin_make
+```
+
+# Sourcing
+source the following in bashrc by typing the following 
+```
+gedit ~/.bashrc
+source ~/catkin_ws/devel/setup.bash
+source ~/.bashrc
+```
+Below stubs will be updated in the future 
+# Run Tests
+```
+cd ~/catkin_ws/
+```
+
+# Running Demo 
+```
+cd ~/catkin_w
+```
+# Doxygen Documentation 
+
+# Coverage 
+
+# Recording ROSBAG
+
+## Running ROSBAG
