@@ -3,8 +3,19 @@
 [![Build Status](https://travis-ci.org/saimouli/frontier_exploration_turtlebot.svg?branch=master)](https://travis-ci.org/saimouli/frontier_exploration_turtlebot)
 [![Coverage Status](https://coveralls.io/repos/github/saimouli/frontier_exploration_turtlebot/badge.svg?branch=master)](https://coveralls.io/github/saimouli/frontier_exploration_turtlebot?branch=master)
 
+# Authors 
+- Saurav Kumar
+- Saimouli Katragadda
+
+This package is developed by following an agile software development technique called pair programming (where a pair of programmers take turns writing and inspecting code), a product backlog and iteration logs is also documented and links are below. Additionally, Test Driven Development (TDD) where a development cycle with repetitive testing, writing code, and code refactoring process will befollowed.
+
 # Overview
-ROS based autonomous frontier exploration 
+A map of the environment plays a crucial role in our robot’s navigation, guidance and path
+planning module. With the changing interiors in a room and each time letting the user map
+manually is tedious. Having the robot to explore the entire room autonomously to build a map is very
+essential for a product to be commercially successful. The objective of this project is to build a basic
+turtlebot based frontier exploration package capable of autonomously navigating and building a map in a confined
+room until the user is satisfied with the output using ROS and C++.
 
 # License
 ```
@@ -84,3 +95,5 @@ cd ~/catkin_w
 # Recording ROSBAG
 
 ## Running ROSBAG
+
+# About us
