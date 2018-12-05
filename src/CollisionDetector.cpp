@@ -34,19 +34,47 @@
 #include "frontier_exploration_turtlebot/CollisionDetector.h"
 
 CollisionDetector::CollisionDetector() {
-  
+  ROS_INFO("Initializing Object Detection!");
+
+  CollisionFlag = false;
+
+  sub = nh.subscribe<sensor_msgs::LaserScan>("/scan", 50,
+                                             &CollisionDetector::laserCallback,
+                                             this);
+
+  distancePub = nh.advertise<std_msgs::Float64>("/minDistance", 50);
+
+  distanceSub = nh.subscribe<std_msgs::Float64>(
+      "/minDistance", 50, &CollisionDetector::distanceCallback, this);
 }
 
 CollisionDetector::~CollisionDetector() {
 
 }
 
-void CollisionDetector::laserCallback() {
-   
+void CollisionDetector::laserCallback(
+    const sensor_msgs::LaserScan::ConstPtr& msg) {
+  float threshold = 100;
+  for (auto& i : msg->ranges) {
+    if (i < threshold) {
+      threshold = i;
+    }
+  }
+
+  std_msgs::Float64 msgRange;
+  msgRange.data = threshold;
+  distancePub.publish(msgRange);
 }
 
-void CollisionDetector::distanceCallback() {
+void CollisionDetector::distanceCallback(
+    const std_msgs::Float64::ConstPtr& msg) {
+  float minDist = 1.5;
 
+  if ((msg->data) < minDist) {
+    CollisionFlag = true;
+    return;
+  }
+  CollisionFlag = false;
 }
 
 bool CollisionDetector::checkObstacles() {
