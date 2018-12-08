@@ -55,9 +55,15 @@ This project uses the following packages:
 - Turtlebot ROS packages
 - Hector_slam packages
 - Ubuntu 16.04
-
+ 
 # Algorithm Overview 
-This part will be updated in future 
+There are two path planning generators called   ```Linear Path Genenrator``` and ```Spiral Path Generator``` to generate the motion of the turtlebot in the simulated obstacle free environment. The ```Linear Path Generator``` generates a linear path for the turtlebot in the collision free area. Whereas, the later generates discrete spiral path. ```CollisionDetecter``` overrides ```Linear Path Generator``` and ```Spiral Path Generator``` whenever an object is in the vicinity of the turtlebot.
+
+
+The ```CollisionDetecter``` algorithm divides the vicinity of the turtelbot into two areas : ```Front``` & ```Rear```. It then compares the obstacles in these two vicinities and make a decision either to move forward or to rotate. <TODDO: eloborate the algorithm>
+
+The ```Linear Path Genenrator``` or ```Spiral Path Generator``` kicks in back once both of the vicinities are obstacle free.
+
 # Build Instructions
 To run follow the following commands 
 ```
@@ -96,4 +102,9 @@ cd ~/catkin_w
 
 ## Running ROSBAG
 
-# About us
+# About Authors 
+## Saurav
+Saurav is pursuing Masters in Robotics Engineering.He has five years of experience in research and development field in automobile sector at Daimler.He is passionate about autonomous driving system such as self steering,cross track error minimization, and traffic detection. Refer Linkedin profile [here](https://www.linkedin.com/in/saurav-kumar-2a532242/).
+
+## Saimouli 
+Saimouli is pursuing Robotic Engineering at UMD. He is passionate about flying cars, drones, and deep learning. In future, he would like design and create autonomous flights. Outside of academics, he is involved in Autonomous Micro Aerial Vehicle Team and loves to watch movies and make short films in his free time. 
