@@ -1,0 +1,41 @@
+<launch>
+  <arg name="record" default="false" />
+  <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="x_pos" default="0.0"/>
+  <arg name="y_pos" default="0.0"/>
+  <arg name="z_pos" default="0.0"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find frontier_exploration_turtlebot)/world/turtlebotDemo.world"/>
+    <!--<arg name="world_name" value="$(find frontier_exploration_turtlebot)/world/turtlebotDemo1.world"/-->
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model turtlebot3_$(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+
+     <include file="$(find turtlebot3_slam)/launch/turtlebot3_slam.launch">
+	<arg name="slam_methods" value="gmapping"/>
+     </include>
+       
+   <node
+	pkg="frontier_exploration_turtlebot"
+	name="frontierExplorer"
+	type="frontierExplorer"
+	output="screen"
+	launch-prefix="gnome-terminal --command"
+    />
+
+    <node
+	pkg="rosbag"
+	name="record"
+	type="record"
+	args="-a -x /camera/(.*) -O $(find turtlebot_walker)/results/turtlebotRecord.bag"
+	if="$(arg record)"
+    />
+</launch>
