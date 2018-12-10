@@ -33,31 +33,31 @@
  *and collision flag
  */
 
-#ifndef COLLISIONDETECTOR_H_
-#define COLLISIONDETECTOR_H_
+#ifndef INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_COLLISIONDETECTOR_H_
+#define INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_COLLISIONDETECTOR_H_
 
+
+#include <vector>
+#include <algorithm>
 #include "ros/ros.h"
 #include "sensor_msgs/LaserScan.h"
 #include "geometry_msgs/Twist.h"
-#include "std_msgs/Float64.h"
+
 
 /**
  * @brief CollisonDetector Class
- * class to publish distance from the obstacle, find the presence of the obstacle
- * and coordinate other classes
+ * class to find the the presence of the obstacle and to distinguish the position
+ * of the obstance in the front or rear of the turtlebot
+ *
  */
 class CollisionDetector {
  private:
   // variable to detect collision
-  bool CollisionFlag;
+  int CollisionFlag;
   // node handler
-  ros::NodeHandle nh;
+  //ros::NodeHandle nh;
   // subscribe laser scan topic
-  ros::Subscriber sub;
-  // subscribes range from laserscan
-  ros::Subscriber distanceSub;
-  // publishes distance from the robot to the obstacle
-  ros::Publisher distancePub;
+  //ros::Subscriber sub;
 
  public:
   /**
@@ -87,22 +87,14 @@ class CollisionDetector {
   void laserCallback(const sensor_msgs::LaserScan::ConstPtr& msg);
 
   /**
-   * @brief distance callback function
-   * @param msg of type sensor_msgs::Float64
-   * @return none
-   * A call back function to read minimum distance
-   * from the obstacle to the robot
-   */
-  void distanceCallback(const std_msgs::Float64::ConstPtr& msg);
-
-  /**
    * @brief Check obstacles function
    * @param none
    * @return boolean
    * Funciton which checks if the obstacle is within the vicinity
    * of the robot and returns the CollisionFlag
    */
-  bool checkObstacles();
+  int checkObstacles();
 };
 
-#endif /* COLLISIONDETECTOR_H_ */
+#endif  // INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_COLLISIONDETECTOR_H_
+
