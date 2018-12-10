@@ -24,16 +24,16 @@
  */
 #include <ros/ros.h>
 #include <gtest/gtest.h>
-#include <ros/service_client.h>
-#include "../include/frontier_exploration_turtlebot/Guidance.h"
 
 /**
- * @brief      Tests spiralPathGenerator method of the class Guidance
- *
- * @param      GuidanceTest               gtest framework
- * @param      planTest                   Name of the test
+ * @brief  main function for calling tests
+ * @param  argc int
+ * @param  argv character array
+ * @return 0 on successful exit
  */
-TEST(GuidanceTest, planTest) {
 
+int main(int argc, char** argv) {
+  ros::init(argc, argv, "frontierExplorerTest");
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }
-
