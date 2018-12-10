@@ -25,13 +25,116 @@
 #include <ros/ros.h>
 #include <gtest/gtest.h>
 #include "../include/frontier_exploration_turtlebot/PathPlanning.h"
+#include "../include/frontier_exploration_turtlebot/CollisionDetector.h"
 
-/**
- * @brief      Tests spiralPathGenerator method of the class PathPlanning
- *
- * @param      PathPlanningTest               gtest framework
- * @param      spiralPathGeneratorTest        Name of the test
- */
+
+float linX=0.0, angZ;
+void testCallback(const geometry_msgs::Twist msg) {
+    linX = msg.linear.x;
+    angZ = msg.angular.z;
+  }
+
+TEST(PathPlanningTest, InitializationErrorTest) {
+  ros::NodeHandle nh;
+  EXPECT_NO_FATAL_FAILURE(PathPlanning pathPlanner);
+}
+
+/*
+TEST(PathPlanningTest, PathPlanningPublisherTest) {
+  ros::NodeHandle nh;
+  CollisionDetector cdetect;
+  PathPlanning pathPlanner;
+  pathPlanner.PathGenerator();
+  auto sub = nh.subscribe("/cmd_vel", 50, &CollisionDetector::laserCallback,
+                          &cdetect);
+  std::cout << sub.getNumPublishers();
+
+  EXPECT_EQ(sub.getNumPublishers(), 1);
+}*/
+
+
 TEST(PathPlanningTest, spiralPathGeneratorTest) {
+  ros::NodeHandle nh;
 
+    ros::Publisher testPub = nh.advertise
+         <sensor_msgs::LaserScan> ("/scan", 50);
+
+    sensor_msgs::LaserScan laserData;
+    laserData.angle_min = -0.52;
+    laserData.angle_max = 0.52;
+    laserData.angle_increment = 0.0016;
+    laserData.time_increment = 0.0;
+    laserData.range_min = 0.44;
+    laserData.range_max = 3.0;
+    laserData.ranges.resize(50);
+    laserData.intensities.resize(50);
+
+    for (auto& i : laserData.ranges) {
+       i = 0.0;
+     }
+
+    PathPlanning planner;
+
+    ros::Subscriber testSub = nh.subscribe
+        <geometry_msgs::Twist>
+    ("/cmd_vel", 50, testCallback);
+
+    int counter = 0;
+
+    while (ros::ok()) {
+      testPub.publish(laserData);
+      planner.spiralPathGenerator();
+
+      if (counter == 3) {
+        break;
+      }
+      ros::spinOnce();
+      counter++;
+    }
+      EXPECT_NEAR (0.2,linX, 0.1);
+      EXPECT_EQ(0.0, angZ);
+  }
+
+
+TEST(PathPlanningTest, linearPathGeneratorTest) {
+  ros::NodeHandle nh;
+
+  ros::Publisher testPub = nh.advertise
+       <sensor_msgs::LaserScan> ("/scan", 50);
+
+  sensor_msgs::LaserScan laserData;
+  laserData.angle_min = -0.52;
+  laserData.angle_max = 0.52;
+  laserData.angle_increment = 0.0016;
+  laserData.time_increment = 0.0;
+  laserData.range_min = 0.44;
+  laserData.range_max = 3.0;
+  laserData.ranges.resize(50);
+  laserData.intensities.resize(50);
+
+  for (auto& i : laserData.ranges) {
+     i = 0.0;
+}
+
+  PathPlanning planner;
+
+  ros::Subscriber testSub = nh.subscribe
+      <geometry_msgs::Twist>
+  ("/cmd_vel", 50, testCallback);
+
+  int counter = 0;
+
+  while (ros::ok()) {
+    testPub.publish(laserData);
+    planner.linearPathGenerator();
+
+    if (counter == 3) {
+      break;
+    }
+    ros::spinOnce();
+    counter++;
+  }
+
+    EXPECT_NEAR (0.2,linX, 0.1);
+    EXPECT_EQ(0.0, angZ);
 }

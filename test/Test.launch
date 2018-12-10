@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="frontier_exploration_turtlebot" name="frontierExplorer"  type="frontierExplorer" />
+  <test pkg="frontier_exploration_turtlebot" test-name="frontierExplorerTest" type="frontierExplorerTest" />
+</launch>
