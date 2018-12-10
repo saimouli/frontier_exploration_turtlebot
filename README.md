@@ -52,10 +52,47 @@ Saimouli Katragadda and Saurav Kumar worked together on this implementation and 
 # Dependencies
 This project uses the following packages: 
 - ROS Kinetic
-- Turtlebot ROS packages
-- Hector_slam packages
+- Turtlebot3 ROS packages
+- gmapping slam packages
 - Ubuntu 16.04
- 
+
+## Packages Installation Steps
+Following section will describe steps necessary to install turtlebot3 dependencies. Alternately you can follow from the 
+offical guide [here](http://emanual.robotis.com/docs/en/platform/turtlebot3/setup/#setup)
+
+Install ROS turtlebot3 dependent packages:
+```sudo apt-get install ros-kinetic-joy ros-kinetic-teleop-twist-joy ros-kinetic-teleop-twist-keyboard ros-kinetic-laser-proc ros-kinetic-rgbd-launch ros-kinetic-depthimage-to-laserscan ros-kinetic-rosserial-arduino ros-kinetic-rosserial-python ros-kinetic-rosserial-server ros-kinetic-rosserial-client ros-kinetic-rosserial-msgs ros-kinetic-amcl ros-kinetic-map-server ros-kinetic-move-base ros-kinetic-urdf ros-kinetic-xacro ros-kinetic-compressed-image-transport ros-kinetic-rqt-image-view ros-kinetic-gmapping ros-kinetic-navigation ros-kinetic-interactive-markers sudo apt-get install ros-kinetic-hector-mapping```
+
+For Turtlebot3 packages follow the following steps:
+```
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/
+catkin_make
+source devel/setup.bash
+cd src/
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+git clone https://github.com/ROBOTIS-GIT/turtlebot3.git
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+cd ..
+catkin_make
+```
+Open your bashrc file
+```
+gedit ~/.bashrc
+```
+Type the following in your bashrc file: 
+
+Replace ```<IP>``` with your systems IP address 
+```
+source /opt/ros/kinetic/setup.bash
+source ~/catkin_ws/devel/setup.bash
+export ROS_MASTER_URI=http://<IP>:11311
+export ROS_HOSTNAME=<IP>
+export TURTLEBOT3_MODEL=waffle
+ ```
+save and close the bashrc file and source it 
+```source ~/.bashrc```
+
 # Algorithm Overview 
 There are two path planning generators called   ```Linear Path Genenrator``` and ```Spiral Path Generator``` to generate the motion of the turtlebot in the simulated obstacle free environment. The ```Linear Path Generator``` generates a linear path for the turtlebot in the collision free area. Whereas, the later generates discrete spiral path. ```CollisionDetecter``` overrides ```Linear Path Generator``` and ```Spiral Path Generator``` whenever an object is in the vicinity of the turtlebot.
 
@@ -65,7 +102,15 @@ The ```CollisionDetecter``` algorithm divides the vicinity of the turtelbot into
 The ```Linear Path Genenrator``` or ```Spiral Path Generator``` kicks in back once both of the vicinities are obstacle free.
 
 # Build Instructions
-To run follow the following commands 
+If you followed above package dependencies installation section follow this else see the ```version2```
+```
+cd ~/catkin_ws/src/
+git clone --recursive https://github.com/saimouli/frontier_exploration_turtlebot.git
+cd ..
+catkin_make
+```
+## Version2
+To build follow the following commands 
 ```
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/
@@ -104,7 +149,7 @@ cd ~/catkin_w
 
 # About Authors 
 ## Saurav
-Saurav is pursuing Masters in Robotics Engineering.He has five years of experience in research and development field in automobile sector at Daimler.He is passionate about autonomous driving system such as self steering,cross track error minimization, and traffic detection. Refer Linkedin profile [here](https://www.linkedin.com/in/saurav-kumar-2a532242/).
+Saurav is pursuing Masters in Robotics Engineering.He has five years of experience in research and development field in automobile sector at Daimler.He is passionate about autonomous driving system such as self steering,cross track error minimization, and traffic detection. Refer to his Linkedin profile [here](https://www.linkedin.com/in/saurav-kumar-2a532242/).
 
 ## Saimouli 
-Saimouli is pursuing Robotic Engineering at UMD. He is passionate about flying cars, drones, and deep learning. In future, he would like design and create autonomous flights. Outside of academics, he is involved in Autonomous Micro Aerial Vehicle Team and loves to watch movies and make short films in his free time. 
+Saimouli is pursuing Robotic Engineering at UMD. He is passionate about flying cars, drones, and deep learning. In future, he would like design and create autonomous flights. Outside of academics, he is involved with the Autonomous Micro Aerial Vehicle Team and also loves to watch movies and make short films in his free time. 
