@@ -32,8 +32,8 @@
  *Declares functions to publish spiral trajectories
  */
 
-#ifndef PATHPLANNING_H_
-#define PATHPLANNING_H_
+#ifndef INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_PATHPLANNING_H_
+#define INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_PATHPLANNING_H_
 
 #include "ros/ros.h"
 #include "sensor_msgs/LaserScan.h"
@@ -42,11 +42,13 @@
 
 /**
  * @brief PathPlanning Class
- * class to publish spiral trajectories according to the
- * simulated environment
+ * class to publish spiral trajectories and linear trajectories and kicks in the colloision avoiding algorithm when required
+ *
  */
 class PathPlanning {
  private:
+  // Create CollisionDetector Object
+  CollisionDetector collisiondetector;
   // variable to generate discrete spiral steps
   int count;
   // variable to declare maximum spiral step count
@@ -61,8 +63,8 @@ class PathPlanning {
   ros::Publisher pubVel;
   // node handler
   ros::NodeHandle nh;
-  // create CollisionDetector
-  CollisionDetector collisiondetector_;
+  // subscriber
+  ros::Subscriber sub;
 
  public:
   /**
@@ -90,6 +92,15 @@ class PathPlanning {
    * generates spiral trajectories and publishes them
    */
   void spiralPathGenerator();
+
+  /**
+     * @brief linear generator function
+     * @param none
+     * @return none
+     * generates linear trajectories and publishes them
+     */
+  void linearPathGenerator();
+
 };
 
-#endif /* FRONTIER_EXPLORATION_TURTLEBOT_INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_PATHPLANNING_H_ */
+#endif  // INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_PATHPLANNING_H_
