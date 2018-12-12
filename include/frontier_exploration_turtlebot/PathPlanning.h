@@ -36,9 +36,8 @@
 #define INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_PATHPLANNING_H_
 
 #include "ros/ros.h"
-#include "sensor_msgs/LaserScan.h"
 #include "geometry_msgs/Twist.h"
-#include "CollisionDetector.h"
+#include "../include/frontier_exploration_turtlebot/CollisionDetector.h"
 
 /**
  * @brief PathPlanning Class
@@ -100,7 +99,6 @@ class PathPlanning {
      * generates linear trajectories and publishes them
      */
   void linearPathGenerator();
-
 };
 
 #endif  // INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_PATHPLANNING_H_

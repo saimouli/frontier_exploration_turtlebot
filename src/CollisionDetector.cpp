@@ -31,14 +31,18 @@
  *@brief implements the collisionDetector class methods
  */
 
-#include "frontier_exploration_turtlebot/CollisionDetector.h"
+#include <vector>
+#include <algorithm>
+#include "ros/ros.h"
+#include "sensor_msgs/LaserScan.h"
+#include "../include/frontier_exploration_turtlebot/CollisionDetector.h"
 
 CollisionDetector::CollisionDetector() {
   ROS_INFO("Initializing Collision Detection!");
 
   CollisionFlag = 0;
 
-  //sub = nh.subscribe<sensor_msgs::LaserScan>("/scan", 50,
+  //  sub = nh.subscribe<sensor_msgs::LaserScan>("/scan", 50,
    //        &CollisionDetector::laserCallback, this);
 }
 
@@ -51,14 +55,14 @@ void CollisionDetector::laserCallback(
   std::vector<float> msgstore = msg->ranges;
   int countInd = 0;
 
-  for(auto i : msgstore) {
-    //ROS_INFO_STREAM("new auto: "<< i);
+  for (auto i : msgstore) {
+    //  ROS_INFO_STREAM("new auto: "<< i);
     int a = std::isinf(i);
-    if (a==1) {
+    if (a == 1) {
       // Replacing values in Inf values with max value 0.5
-      msgstore[countInd] = 0.45;
+      msgstore[countInd] = 0.5;
     }
-    countInd ++;
+    countInd++;
   }
 
 
@@ -70,38 +74,32 @@ void CollisionDetector::laserCallback(
   //      }
   // }
 
-  float sumq1 = 0.0;
-  float sumq2 =0.0;
+  double sumq1 = 0, sumq2 = 0;
+  int counter = 0;
 
-  int counter = 0; // [0.2 0 0.3 0.5 0.3 0.5]
 
-  for(auto i : msgstore) {
-    if (i >= 0 && i <= 0.45) {
-      //ROS_INFO_STREAM("ifloop ");
+  for (auto i : msgstore) {
+    if (i >= 0 && i <= 0.5) {
       if (counter >= 0 && counter < 45) {
-        sumq1 = sumq1 + msgstore[counter]* 10;
-        //ROS_INFO_STREAM("inside q1 " << sumq1 << " "<<counter);
+        sumq1 = sumq1 + msgstore[counter];
       }
       if (counter >= 315 && i <= 359) {
-        sumq1 = sumq1 + msgstore[counter] * 10;
-         //ROS_INFO_STREAM("inside -45 45 q1 " << sumq1 << " "<<counter);
+        sumq1 = sumq1 + msgstore[counter];
       }
       if (counter >= 135 && counter < 225) {
-        sumq2 = sumq2 + msgstore[counter]* 10;
-         //ROS_INFO_STREAM("inside q2 " << sumq2 << " "<<counter);
+        sumq2 = sumq2 + msgstore[counter];
       }
-  
     }
     counter++;
   }
-  ROS_INFO_STREAM("Front obstacle area: " << sumq1);
-  ROS_INFO_STREAM("Rear obstacle area: " << sumq2);
+  ROS_INFO_STREAM("Front area: " << sumq1);
+  ROS_INFO_STREAM("Rear area: " << sumq2);
 
 
 //   sumq1 = 0, sumq2 = 0;
 //   for (int i = 0; i <= 359; i++) {
 // //  ROS_INFO_STREAM(i);
-//     if (msgstore[i] >= 0 && msgstore[i] <= 0.3) {
+//     if (msgstore[i] >= 0 && msgstore[i] <= 0.5) {
 //       if (i >= 0 & i < 45) {
 //         sumq1 = sumq1 + msgstore[i];
 //       }
@@ -117,10 +115,10 @@ void CollisionDetector::laserCallback(
 //   ROS_INFO_STREAM("Rear area : " << sumq2);
 
 double minelement = std::min(sumq1, sumq2);
-if (minelement == sumq1 && minelement < 30) {
+if (minelement == sumq1) {
   CollisionFlag = 1;
 }
-if (minelement == sumq2 && minelement < 30) {
+if (minelement == sumq2) {
   CollisionFlag = 2;
 }
 if (sumq1 == sumq2) {
@@ -131,4 +129,3 @@ if (sumq1 == sumq2) {
 int CollisionDetector::checkObstacles() {
   return CollisionFlag;
 }
-

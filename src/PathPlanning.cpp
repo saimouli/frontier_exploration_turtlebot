@@ -30,15 +30,18 @@
  *@copyright MIT License
  *@brief implements the PathPlanning class methods
  */
-
-#include "frontier_exploration_turtlebot/PathPlanning.h"
+#include "ros/ros.h"
+#include "sensor_msgs/LaserScan.h"
+#include "geometry_msgs/Twist.h"
+#include "../include/frontier_exploration_turtlebot/CollisionDetector.h"
+#include "../include/frontier_exploration_turtlebot/PathPlanning.h"
 
 PathPlanning::PathPlanning() {
   ROS_INFO("Creating the Explorer behaviour...");
   // Set some parameters
   linearSpeed = 0.2;
   angularSpeed = 1;
-  // Publish the velocity to cmd_vel_mux/input/navi
+  // Publish the velocity to cmd_vel
   pubVel = nh.advertise<geometry_msgs::Twist>("/cmd_vel", 1000);
 
   sub = nh.subscribe<sensor_msgs::LaserScan>("/scan", 50,
@@ -69,7 +72,7 @@ PathPlanning::~PathPlanning() {
 
 void PathPlanning::linearPathGenerator() {
   ros::Rate loop_rate(2);
-  //while (ros::ok()) {
+  //  while (ros::ok()) {
     if (collisiondetector.checkObstacles() == 1) {
       msg.linear.x = 0;
       msg.angular.z = angularSpeed;
@@ -98,7 +101,7 @@ void PathPlanning::linearPathGenerator() {
 
 void PathPlanning::spiralPathGenerator() {
   ros::Rate loop_rate(2);
- // while (ros::ok()) {
+  //  while (ros::ok()) {
     if (count == MaxCount) {
       count = 1;
     }

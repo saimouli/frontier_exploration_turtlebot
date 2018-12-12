@@ -37,11 +37,7 @@
 #define INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_COLLISIONDETECTOR_H_
 
 
-#include <vector>
-#include <algorithm>
-#include "ros/ros.h"
 #include "sensor_msgs/LaserScan.h"
-#include "geometry_msgs/Twist.h"
 
 
 /**
@@ -54,10 +50,6 @@ class CollisionDetector {
  private:
   // variable to detect collision
   int CollisionFlag;
-  // node handler
-  //ros::NodeHandle nh;
-  // subscribe laser scan topic
-  //ros::Subscriber sub;
 
  public:
   /**
@@ -97,4 +89,3 @@ class CollisionDetector {
 };
 
 #endif  // INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_COLLISIONDETECTOR_H_
-
