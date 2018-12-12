@@ -30,8 +30,11 @@
  *@copyright MIT License
  *@brief main function
  */
-#include <frontier_exploration_turtlebot/PathPlanning.h>
 
+#include <ros/ros.h>
+#include <frontier_exploration_turtlebot/PathPlanning.h>
+#include <frontier_exploration_turtlebot/CollisionDetector.h>
+#include <iostream>
 
 /**
  * @brief      main function
@@ -49,7 +52,7 @@ int main(int argc, char* argv[]) {
   std::cout << "To save the map rosrun map_server map_saver -f my_map"
             << std::endl;
   std::cout
-  << "Would you like to take linear path (0) or spiral path finder (1)?"
+      << "Would you like to take linear path (0) or spiral path finder (1)?"
       " (Enter 0 or 1): ";
   std::cin >> userChoice;
 
@@ -62,7 +65,7 @@ int main(int argc, char* argv[]) {
       pathPlanning.linearPathGenerator();
     }
   }
-std::cin.get();
+  std::cin.get();
   if (userChoice == 1) {
     while (ros::ok()) {
       pathPlanning.spiralPathGenerator();

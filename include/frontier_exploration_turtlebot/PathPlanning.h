@@ -35,9 +35,9 @@
 #ifndef INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_PATHPLANNING_H_
 #define INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_PATHPLANNING_H_
 
-#include "ros/ros.h"
-#include "geometry_msgs/Twist.h"
-#include "../include/frontier_exploration_turtlebot/CollisionDetector.h"
+#include <ros/ros.h>
+#include <geometry_msgs/Twist.h>
+#include <frontier_exploration_turtlebot/CollisionDetector.h>
 
 /**
  * @brief PathPlanning Class
@@ -93,11 +93,11 @@ class PathPlanning {
   void spiralPathGenerator();
 
   /**
-     * @brief linear generator function
-     * @param none
-     * @return none
-     * generates linear trajectories and publishes them
-     */
+   * @brief linear generator function
+   * @param none
+   * @return none
+   * generates linear trajectories and publishes them
+   */
   void linearPathGenerator();
 };
 

@@ -30,11 +30,11 @@
  *@copyright MIT License
  *@brief implements the PathPlanning class methods
  */
-#include "ros/ros.h"
-#include "sensor_msgs/LaserScan.h"
-#include "geometry_msgs/Twist.h"
-#include "../include/frontier_exploration_turtlebot/CollisionDetector.h"
-#include "../include/frontier_exploration_turtlebot/PathPlanning.h"
+#include <ros/ros.h>
+#include <sensor_msgs/LaserScan.h>
+#include <geometry_msgs/Twist.h>
+#include <frontier_exploration_turtlebot/CollisionDetector.h>
+#include <frontier_exploration_turtlebot/PathPlanning.h>
 
 PathPlanning::PathPlanning() {
   ROS_INFO("Creating the Explorer behaviour...");
@@ -45,7 +45,8 @@ PathPlanning::PathPlanning() {
   pubVel = nh.advertise<geometry_msgs::Twist>("/cmd_vel", 1000);
 
   sub = nh.subscribe<sensor_msgs::LaserScan>("/scan", 50,
-           &CollisionDetector::laserCallback, &collisiondetector);
+                                             &CollisionDetector::laserCallback,
+                                             &collisiondetector);
   // Define the initial velocity message
   msg.linear.x = 0.0;
   msg.linear.y = 0.0;
@@ -73,41 +74,66 @@ PathPlanning::~PathPlanning() {
 void PathPlanning::linearPathGenerator() {
   ros::Rate loop_rate(2);
   //  while (ros::ok()) {
-    if (collisiondetector.checkObstacles() == 1) {
-      msg.linear.x = 0;
-      msg.angular.z = angularSpeed;
-      // ROS_INFO_STREAM(
-      // "collision : "<< collisiondetector.checkObstacles() <<" ,");
-    }
-    if (collisiondetector.checkObstacles() == 2) {
-      msg.linear.x = linearSpeed;
-      msg.angular.z = 0.0;
-      //  ROS_INFO_STREAM(
-      //  "collision : "<< collisiondetector.checkObstacles());
-    }
-    if (collisiondetector.checkObstacles() == 0) {
-      msg.linear.x = linearSpeed;
-      msg.angular.z = 0.0;
-      //  ROS_INFO_STREAM(
-      //  i << "," << count <<" ," << "linear : "
-      //  << msg.linear.x << "angular : " << msg.angular.z);
-    }
-
-    pubVel.publish(msg);
-    ros::spinOnce();
-    loop_rate.sleep();
+  if (collisiondetector.checkObstacles() == 1) {
+    msg.linear.x = 0;
+    msg.angular.z = angularSpeed;
+    // ROS_INFO_STREAM(
+    // "collision : "<< collisiondetector.checkObstacles() <<" ,");
   }
+  if (collisiondetector.checkObstacles() == 2) {
+    msg.linear.x = linearSpeed;
+    msg.angular.z = 0.0;
+    //  ROS_INFO_STREAM(
+    //  "collision : "<< collisiondetector.checkObstacles());
+  }
+  if (collisiondetector.checkObstacles() == 0) {
+    msg.linear.x = linearSpeed;
+    msg.angular.z = 0.0;
+    //  ROS_INFO_STREAM(
+    //  i << "," << count <<" ," << "linear : "
+    //  << msg.linear.x << "angular : " << msg.angular.z);
+  }
+
+  pubVel.publish(msg);
+  ros::spinOnce();
+  loop_rate.sleep();
+}
 //}
 
 void PathPlanning::spiralPathGenerator() {
   ros::Rate loop_rate(2);
   //  while (ros::ok()) {
-    if (count == MaxCount) {
-      count = 1;
-    }
+  if (count == MaxCount) {
+    count = 1;
+  }
 
-    for (int i = 1; i < count; i++) {
-      if (i < count) {
+  for (int i = 1; i < count; i++) {
+    if (i < count) {
+      if (collisiondetector.checkObstacles() == 1) {
+        msg.linear.x = 0;
+        msg.angular.z = angularSpeed;
+        //  ROS_INFO_STREAM(
+        //  "collision : "<< collisiondetector.checkObstacles() <<" ,");
+      }
+      if (collisiondetector.checkObstacles() == 2) {
+        msg.linear.x = linearSpeed;
+        msg.angular.z = 0.0;
+        //  ROS_INFO_STREAM(
+        //  "collision : "<< collisiondetector.checkObstacles());
+      }
+      if (collisiondetector.checkObstacles() == 0) {
+        msg.linear.x = linearSpeed;
+        msg.angular.z = 0.0;
+        //  ROS_INFO_STREAM(
+        //  i << "," << count <<" ," << "linear : "
+        //  << msg.linear.x << "angular : " << msg.angular.z);
+      }
+
+      pubVel.publish(msg);
+      ros::spinOnce();
+      loop_rate.sleep();
+
+      if (i == count - 1) {
         if (collisiondetector.checkObstacles() == 1) {
           msg.linear.x = 0;
           msg.angular.z = angularSpeed;
@@ -118,48 +144,21 @@ void PathPlanning::spiralPathGenerator() {
           msg.linear.x = linearSpeed;
           msg.angular.z = 0.0;
           //  ROS_INFO_STREAM(
-          //  "collision : "<< collisiondetector.checkObstacles());
+          //  "collision : "<< collisiondetector.checkObstacles() <<" ,");
         }
         if (collisiondetector.checkObstacles() == 0) {
-          msg.linear.x = linearSpeed;
-          msg.angular.z = 0.0;
+          msg.linear.x = 0.0;
+          msg.angular.z = angularSpeed;
           //  ROS_INFO_STREAM(
-          //  i << "," << count <<" ," << "linear : "
-          //  << msg.linear.x << "angular : " << msg.angular.z);
+          //  i << "," << count <<" ," << "linear : "<< msg.linear.x
+          //  << "angular : " << msg.angular.z);
         }
 
         pubVel.publish(msg);
         ros::spinOnce();
         loop_rate.sleep();
-
-        if (i == count - 1) {
-          if (collisiondetector.checkObstacles() == 1) {
-            msg.linear.x = 0;
-            msg.angular.z = angularSpeed;
-            //  ROS_INFO_STREAM(
-            //  "collision : "<< collisiondetector.checkObstacles() <<" ,");
-          }
-          if (collisiondetector.checkObstacles() == 2) {
-            msg.linear.x = linearSpeed;
-            msg.angular.z = 0.0;
-            //  ROS_INFO_STREAM(
-            //  "collision : "<< collisiondetector.checkObstacles() <<" ,");
-          }
-          if (collisiondetector.checkObstacles() == 0) {
-            msg.linear.x = 0.0;
-            msg.angular.z = angularSpeed;
-            //  ROS_INFO_STREAM(
-            //  i << "," << count <<" ," << "linear : "<< msg.linear.x
-            //  << "angular : " << msg.angular.z);
-          }
-
-          pubVel.publish(msg);
-          ros::spinOnce();
-          loop_rate.sleep();
-        }
       }
     }
-    count++;
   }
-//}
-
+  count++;
+}

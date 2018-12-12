@@ -36,9 +36,7 @@
 #ifndef INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_COLLISIONDETECTOR_H_
 #define INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_COLLISIONDETECTOR_H_
 
-
-#include "sensor_msgs/LaserScan.h"
-
+#include <sensor_msgs/LaserScan.h>
 
 /**
  * @brief CollisonDetector Class

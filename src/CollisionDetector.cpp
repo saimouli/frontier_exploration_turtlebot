@@ -31,11 +31,11 @@
  *@brief implements the collisionDetector class methods
  */
 
+#include <ros/ros.h>
+#include <sensor_msgs/LaserScan.h>
+#include <frontier_exploration_turtlebot/CollisionDetector.h>
 #include <vector>
 #include <algorithm>
-#include "ros/ros.h"
-#include "sensor_msgs/LaserScan.h"
-#include "../include/frontier_exploration_turtlebot/CollisionDetector.h"
 
 CollisionDetector::CollisionDetector() {
   ROS_INFO("Initializing Collision Detection!");
@@ -43,7 +43,7 @@ CollisionDetector::CollisionDetector() {
   CollisionFlag = 0;
 
   //  sub = nh.subscribe<sensor_msgs::LaserScan>("/scan", 50,
-   //        &CollisionDetector::laserCallback, this);
+  //        &CollisionDetector::laserCallback, this);
 }
 
 CollisionDetector::~CollisionDetector() {
@@ -65,7 +65,6 @@ void CollisionDetector::laserCallback(
     countInd++;
   }
 
-
 // Replacing values in Inf values with max value 0.5
   // for (int i = 0; i <= 359; i++) {
   //   int a = std::isinf(msgstore[i]);
@@ -76,7 +75,6 @@ void CollisionDetector::laserCallback(
 
   double sumq1 = 0, sumq2 = 0;
   int counter = 0;
-
 
   for (auto i : msgstore) {
     if (i >= 0 && i <= 0.5) {
@@ -94,7 +92,6 @@ void CollisionDetector::laserCallback(
   }
   ROS_INFO_STREAM("Front area: " << sumq1);
   ROS_INFO_STREAM("Rear area: " << sumq2);
-
 
 //   sumq1 = 0, sumq2 = 0;
 //   for (int i = 0; i <= 359; i++) {
@@ -114,17 +111,17 @@ void CollisionDetector::laserCallback(
 //   ROS_INFO_STREAM("Front area : " << sumq1);
 //   ROS_INFO_STREAM("Rear area : " << sumq2);
 
-double minelement = std::min(sumq1, sumq2);
-if (minelement == sumq1) {
-  CollisionFlag = 1;
-}
-if (minelement == sumq2) {
-  CollisionFlag = 2;
-}
-if (sumq1 == sumq2) {
-  CollisionFlag = 0;
-}
+  double minelement = std::min(sumq1, sumq2);
+  if (minelement == sumq1) {
+    CollisionFlag = 1;
   }
+  if (minelement == sumq2) {
+    CollisionFlag = 2;
+  }
+  if (sumq1 == sumq2) {
+    CollisionFlag = 0;
+  }
+}
 
 int CollisionDetector::checkObstacles() {
   return CollisionFlag;

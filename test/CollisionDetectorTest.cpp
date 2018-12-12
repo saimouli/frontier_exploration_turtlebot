@@ -24,19 +24,18 @@
  */
 
 #include <ros/ros.h>
+#include <sensor_msgs/LaserScan.h>
+#include <frontier_exploration_turtlebot/CollisionDetector.h>
 #include <gtest/gtest.h>
 #include <iostream>
-#include "../include/frontier_exploration_turtlebot/CollisionDetector.h"
-#include "../include/frontier_exploration_turtlebot/PathPlanning.h"
-
 
 /*
-*
+ *
  * @brief      Tests whether laserCallback method of the class CollisionDetector
  *
  * @param      CollisionDetectorTest     gtest framework
  * @param      CollisionDetectorTest     Name of the test
-*/
+ */
 
 TEST(CollisionDetectorTest, CollisionDetectorTest) {
   CollisionDetector collisionTest;
@@ -52,34 +51,30 @@ TEST(CollisionDetectorTest, CollisionDetectorTest) {
  */
 TEST(CollisionDetectorTest, laserCallbackTest) {
   CollisionDetector collisionTest;
-  //PathPlanning pathPlanner;
-
   ros::NodeHandle nh;
   sensor_msgs::LaserScan laserData;
   laserData.angle_min = -0.52;
-   laserData.angle_max = 0.52;
-   laserData.angle_increment = 0.0016;
-   laserData.time_increment = 0.0;
-   laserData.range_min = 0.44;
-   laserData.range_max = 3.0;
-   laserData.ranges.resize(50);
-   laserData.intensities.resize(50);
+  laserData.angle_max = 0.52;
+  laserData.angle_increment = 0.0016;
+  laserData.time_increment = 0.0;
+  laserData.range_min = 0.44;
+  laserData.range_max = 3.0;
+  laserData.ranges.resize(50);
+  laserData.intensities.resize(50);
 
-   for (auto& i : laserData.ranges){
-     i = 0.0;
-   }
+  for (auto& i : laserData.ranges) {
+    i = 0.0;
+  }
 
-  ros::Publisher testPub = nh.advertise
-       <sensor_msgs::LaserScan> ("/scan", 50);
+  ros::Publisher testPub = nh.advertise<sensor_msgs::LaserScan>("/scan", 50);
 
-  ros::Subscriber testSub = nh.subscribe
-      <sensor_msgs::LaserScan>
-  ("/scan", 50, &CollisionDetector::laserCallback, &collisionTest);
+  ros::Subscriber testSub = nh.subscribe<sensor_msgs::LaserScan>(
+      "/scan", 50, &CollisionDetector::laserCallback, &collisionTest);
 
   int collision = 1;
   int count = 0;
 
-  while(ros::ok()) {
+  while (ros::ok()) {
     testPub.publish(laserData);
     if (collisionTest.checkObstacles() == 0) {
       collision = 0;
@@ -88,6 +83,6 @@ TEST(CollisionDetectorTest, laserCallbackTest) {
     ros::spinOnce();
     count++;
   }
- ROS_INFO_STREAM("count: "<<count);
- ASSERT_FALSE(collision);
+  ROS_INFO_STREAM("count: " << count);
+  ASSERT_FALSE(collision);
 }
