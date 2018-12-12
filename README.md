@@ -6,6 +6,7 @@ Table Contents:
 - [Overview](#overview)
 - [Licence](#licence)
 - [Product Backlog and Sprint Schedule](#sip_process)
+- [Presentation Slides](#present)
 - [Dependencies](#dependencies)
 - [Algorithm Overview](#algorithm)
 - [Results](#results)
@@ -22,7 +23,7 @@ Table Contents:
 - Saimouli Katragadda
 
 ## Saurav
-Saurav is pursuing Masters in Robotics Engineering.He has five years of experience in research and development field in automobile sector at Daimler.He is passionate about autonomous driving system such as self steering,cross track error minimization, and traffic detection. Refer to his Linkedin profile [here](https://www.linkedin.com/in/saurav-kumar-2a532242/).
+Saurav is pursuing Masters in Robotics Engineering.He has five years of experience in research and development field in automobile sector at Daimler.He is passionate about autonomous driving system such as self steering, cross track error minimization, and traffic detection. Refer to his Linkedin profile [here](https://www.linkedin.com/in/saurav-kumar-2a532242/).
 
 ## Saimouli
 Saimouli is pursuing Robotic Engineering at UMD. He is passionate about flying cars, drones, and deep learning. In future, he would like design and create autonomous flights. Outside of academics, he is involved with the Autonomous Micro Aerial Vehicle Team and also loves to watch movies and make short films in his free time.
@@ -69,6 +70,9 @@ The Sprint Planning and review can be accessed [here](https://docs.google.com/do
 
 Saimouli Katragadda and Saurav Kumar worked together on this implementation and alternate commits were made. The commits are made by the driver while the other person acted as navigator.
 
+# <a name="present"></a> Presentation Slides 
+Link to the sildes can be found [here](https://docs.google.com/presentation/d/1LBri_mfvDsKqvUMGZ5PVOpgEUb53M30awwxja8da1Mo/edit?usp=sharing)
+
 # <a name="dependencies"></a> Dependencies
 This project uses the following packages:
 1. ROS Kinetic
@@ -89,12 +93,12 @@ This project uses the following packages:
 
 
 # <a name="algorithm"></a> Algorithm Overview
-There are two path planning generators called   ```Linear Path Genenrator``` and ```Spiral Path Generator``` to generate the motion of the turtlebot in the simulated obstacle free environment. The ```Linear Path Generator``` generates a linear path for the turtlebot in the collision free area. Whereas, the later generates discrete spiral path. ```CollisionDetecter``` overrides ```Linear Path Generator``` and ```Spiral Path Generator``` whenever an object is in the vicinity of the turtlebot.
+There are two path planning generators called   ```Linear Path Generator``` and ```Spiral Path Generator``` to generate the motion of the turtlebot in the simulated obstacle free environment. The ```Linear Path Generator``` generates a linear path for the turtlebot in the collision free area. Whereas, the later generates discrete spiral path. ```CollisionDetecter``` overrides ```Linear Path Generator``` and ```Spiral Path Generator``` whenever an object is in the vicinity of the turtlebot.
 
 
-The ```CollisionDetecter``` algorithm divides the vicinity of the turtelbot into two areas : ```Front``` & ```Rear```. It then compares the obstacles in these two vicinities and make a decision either to move forward or to rotate. <TODDO: eloborate the algorithm>
+The ```CollisionDetecter``` algorithm divides the vicinity of the turtelbot into two areas : ```Front``` & ```Rear```. It then compares the obstacles in these two vicinities and make a decision either to move forward or to rotate. <TODDO: elaborate the algorithm>
 
-The ```Linear Path Genenrator``` or ```Spiral Path Generator``` kicks in back once both of the vicinities are obstacle free.
+The ```Linear Path Generator``` or ```Spiral Path Generator``` kicks in back once both of the vicinities are obstacle free.
 
 # <a name="results"></a> Results
 <p align="center">
@@ -104,6 +108,7 @@ alt="NMPC" width="800" height="400" border="10" />
 </p>
 
 # <a name="installdepend"></a> Dependencies Installation
+[A video is created demonstrating the below installation steps] (https://youtu.be/P_-cCO_jp-s)
 
 - ## Turtlebot3 packages installation
 Following section will describe steps necessary to install turtlebot3 dependencies. Alternately you can follow from the
@@ -150,6 +155,8 @@ save and close the bashrc file and source it
 
 
 ## Build Instructions
+[A demo video is prepared to show build and run steps](https://youtu.be/Joi58ArrooQ)
+
 If you followed above package dependencies installation section follow this else see the ```version2```
 ```
 cd ~/catkin_ws/src/
