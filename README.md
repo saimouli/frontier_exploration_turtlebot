@@ -51,17 +51,28 @@ Saimouli Katragadda and Saurav Kumar worked together on this implementation and 
 
 # Dependencies
 This project uses the following packages: 
-- ROS Kinetic
-- Turtlebot3 ROS packages
-- gmapping slam packages
-- Ubuntu 16.04
+1. ROS Kinetic
+2. Ubuntu 16.04
+3. Packages Dependencies:
+
+ * Turtlebot3 ROS packages
+ * gmapping slam packages
+ * roscpp
+ * rospy
+ * std_msgs
+ * geometry_msgs
+ * tf
+ * rostest
+ * rosbag
+ * sensor_msgs
+ * move_base_msgs
 
 ## Packages Installation Steps
 Following section will describe steps necessary to install turtlebot3 dependencies. Alternately you can follow from the 
 offical guide [here](http://emanual.robotis.com/docs/en/platform/turtlebot3/setup/#setup)
 
 Install ROS turtlebot3 dependent packages:
-```sudo apt-get install ros-kinetic-joy ros-kinetic-teleop-twist-joy ros-kinetic-teleop-twist-keyboard ros-kinetic-laser-proc ros-kinetic-rgbd-launch ros-kinetic-depthimage-to-laserscan ros-kinetic-rosserial-arduino ros-kinetic-rosserial-python ros-kinetic-rosserial-server ros-kinetic-rosserial-client ros-kinetic-rosserial-msgs ros-kinetic-amcl ros-kinetic-map-server ros-kinetic-move-base ros-kinetic-urdf ros-kinetic-xacro ros-kinetic-compressed-image-transport ros-kinetic-rqt-image-view ros-kinetic-gmapping ros-kinetic-navigation ros-kinetic-interactive-markers sudo apt-get install ros-kinetic-hector-mapping```
+```sudo apt-get install ros-kinetic-joy ros-kinetic-teleop-twist-joy ros-kinetic-teleop-twist-keyboard ros-kinetic-laser-proc ros-kinetic-rgbd-launch ros-kinetic-depthimage-to-laserscan ros-kinetic-rosserial-arduino ros-kinetic-rosserial-python ros-kinetic-rosserial-server ros-kinetic-rosserial-client ros-kinetic-rosserial-msgs ros-kinetic-amcl ros-kinetic-map-server ros-kinetic-move-base ros-kinetic-urdf ros-kinetic-xacro ros-kinetic-compressed-image-transport ros-kinetic-rqt-image-view ros-kinetic-gmapping ros-kinetic-navigation ros-kinetic-interactive-markers ros-kinetic-hector-mapping```
 
 For Turtlebot3 packages follow the following steps:
 ```
@@ -129,23 +140,76 @@ gedit ~/.bashrc
 source ~/catkin_ws/devel/setup.bash
 source ~/.bashrc
 ```
-Below stubs will be updated in the future 
 # Run Tests
+Level 1: unit tests 
+Level 2: ros tests 
+both can run by the following command: 
 ```
 cd ~/catkin_ws/
+catkin_make run_tests frontierExplorer
 ```
-
 # Running Demo 
 ```
-cd ~/catkin_w
+cd ~/catkin_ws
+roslaunch frontier_explorer_turtlebot demo.launch 
+```
+On the terminal there will be set of instructions which required user input 
+```
+Would you like to take linear path (0) or spiral path finer(1)? (Enter 0 or 1)
+```
+Based on the input the turtlebot will execute its exploration. Default is set to linear path. More about the spiral and linear search pattern is explained in the algorithm section. 
+
+If you are satisfied with the map it produced press ctr+c on the terminal where you have given your input 
+
+In a seperate terminal run 
+```
+rosrun map_server map_saver -f my_map
 ```
 # Doxygen Documentation 
+If you'd still like to generate it then follow the instructions below
+```
+sudo apt-get install doxygen
+sudo apt-get install doxywizard
+doxywizard
+```
+When doxywizard is open, select the workspace as the repository. Fill in the details as required and set the source code folder to the repository as well. Create a new folder in the repository and select that as the destination directory. Proceed with the default settings and generate the documentation.
 
 # Coverage 
+The current code coverage for the project is 92.0%.
+```
+cd ~/catkin_ws/build
+lcov --directory . --capture --output-file coverage.info
+lcov --list coverage.info
+```
+This will output the coverage of each file in the terminal. To create an html file for the same, run the following command.
+```
+genhtml coverage.info --output-directory covout
+```
+This will store the ```index.html``` file in the folder ```covout```
 
 # Recording ROSBAG
 
+Record the rostopics using the following command with the launch file:
+```
+roslaunch frontier_explorer_turtlebot demo.launch record:=true
+```
+recorded bag file will be stored in the results folder and records all except camera topics 
+
+To record for a specific time
+```
+roslaunch frontier_explorer_turtlebot demo.launch record:=true secs:=20
+```
+In the above case rosbag will record for 20 seconds
+
 ## Running ROSBAG
+navigate to the results folder
+```
+cd ~/catkin_ws/src/frontier_explorer_turtlebot/results 
+```
+play the bag file
+```
+rosbag play turtlebotRecord.bag
+```
 
 # About Authors 
 ## Saurav
