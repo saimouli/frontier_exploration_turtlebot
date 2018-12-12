@@ -1,5 +1,6 @@
 <launch>
   <arg name="record" default="false" />
+  <arg name="secs" default="30"/>
   <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
   <arg name="x_pos" default="0.0"/>
   <arg name="y_pos" default="0.0"/>
@@ -31,11 +32,11 @@
 	launch-prefix="gnome-terminal --command"
     />
 
-    <node
+   <node
 	pkg="rosbag"
 	name="record"
 	type="record"
-	args="-a -x /camera/(.*) -O $(find turtlebot_walker)/results/turtlebotRecord.bag"
-	if="$(arg record)"
+	args="-a -x /camera/(.*) --duration=$(arg secs) -O $(find turtlebot_walker)/results/turtlebotRecord.bag"
+  if="$(arg record)"
     />
 </launch>
