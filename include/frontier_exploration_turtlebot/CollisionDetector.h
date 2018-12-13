@@ -24,13 +24,13 @@
  */
 
 /**
- *@file CollisionDetector.h
- *@author Saimouli Katragadda
- *@author Saurav Kumar
- *@copyright MIT License
- *@brief CollisionDetector class declaration
- *Declares functions to publish distance from the obstacle
- *and collision flag
+ *@file       CollisionDetector.h
+ *@author     Saimouli Katragadda
+ *@author     Saurav Kumar
+ *@copyright  MIT License
+ *@brief      CollisionDetector class declaration
+ *            Declares functions to publish distance from the obstacle
+ *            and collision flag
  */
 
 #ifndef INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_COLLISIONDETECTOR_H_
@@ -39,9 +39,8 @@
 #include <sensor_msgs/LaserScan.h>
 
 /**
- * @brief CollisonDetector Class
- * class to find the the presence of the obstacle and to distinguish the position
- * of the obstance in the front or rear of the turtlebot
+ * @brief          class to find the the presence of the obstacle and to distinguish the position
+ *                 of the obstance in the front or rear of the turtlebot
  *
  */
 class CollisionDetector {
@@ -51,37 +50,37 @@ class CollisionDetector {
 
  public:
   /**
-   * @brief constructor CollisionDetector class
-   * @param none
-   * @return none
-   * initializes values of CollisionFlag and initializes
-   * subscribers and publishers
+   * @brief       constructor CollisionDetector class initializes values of CollisionFlag to 0
+   * @param       none
+   * @return      none
+   *
    */
   CollisionDetector();
 
   /**
-   * @brief destructor CollisionDetector class
-   * @param none
-   * @return none
-   * destroys CollisionDetector class objects when
-   * it goes out of scope.
+   * @brief       destructor CollisionDetector class  destroys CollisionDetector class objects when
+   *              it goes out of scope.
+   * @param       none
+   * @return      none
+   *
    */
   ~CollisionDetector();
 
   /**
-   * @brief laser callback function
-   * @param msg of type sensor_msgs::LaserScan
-   * @return none
-   * A call back function to read laserscan data to update collision status
+   * @brief       laser callback functionCheck :A call back function to read laserscan data and
+   *              checks if the obstacle is within the vicinity of the robot and sets the CollisionFlag(0,1,2)
+   *              based on the position of the object
+   * @param       msg of type sensor_msgs::LaserScan
+   * @return      none
+   *
    */
   void laserCallback(const sensor_msgs::LaserScan::ConstPtr& msg);
 
   /**
-   * @brief Check obstacles function
-   * @param none
-   * @return boolean
-   * Funciton which checks if the obstacle is within the vicinity
-   * of the robot and returns the CollisionFlag
+   * @brief       returns the value stored in CollisionFlag
+   * @param       none
+   * @return      int
+   *
    */
   int checkObstacles();
 };

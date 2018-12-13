@@ -30,30 +30,43 @@
 #include <frontier_exploration_turtlebot/CollisionDetector.h>
 #include <frontier_exploration_turtlebot/PathPlanning.h>
 
+/**
+ *@file         PathPlanningTest.cpp
+ *@author       Saimouli Katragadda
+ *@author       Saurav Kumar
+ *@copyright    MIT License
+ *@brief        Tests the PathPlanning class methods
+ */
+
+// global variable for testing
 float linX = 0.0, angZ;
+
+/**
+ * @brief      global function to store the twist msg value to global float variabls
+ * @param      const geometry_msgs::Twist msg
+ * @return     void
+ */
 void testCallback(const geometry_msgs::Twist msg) {
   linX = msg.linear.x;
   angZ = msg.angular.z;
 }
 
+/**
+ * @brief      Tests for initialization
+ * @param      PathPlanningTest             gtest framework
+ * @param      InitializationErrorTest      Name of the test
+ */
 TEST(PathPlanningTest, InitializationErrorTest) {
   ros::NodeHandle nh;
   EXPECT_NO_FATAL_FAILURE(PathPlanning pathPlanner);
 }
 
-/*
- TEST(PathPlanningTest, PathPlanningPublisherTest) {
- ros::NodeHandle nh;
- CollisionDetector cdetect;
- PathPlanning pathPlanner;
- pathPlanner.PathGenerator();
- auto sub = nh.subscribe("/cmd_vel", 50, &CollisionDetector::laserCallback,
- &cdetect);
- std::cout << sub.getNumPublishers();
-
- EXPECT_EQ(sub.getNumPublishers(), 1);
- }*/
-
+/**
+ * @brief      Tests spiralPathGenerator method of the class PathPlanning
+ * @param      PathPlanningTest             gtest framework
+ * @param      spiralPathGeneratorTest      Name of the test
+ * @return     none
+ */
 TEST(PathPlanningTest, spiralPathGeneratorTest) {
   ros::NodeHandle nh;
 
@@ -94,6 +107,12 @@ TEST(PathPlanningTest, spiralPathGeneratorTest) {
   EXPECT_EQ(0.0, angZ);
 }
 
+/**
+ * @brief      Tests linearPathGenerator method of the class PathPlanning
+ * @param      PathPlanningTest             gtest framework
+ * @param      linearPathGeneratorTest      Name of the test
+ * @return     none
+ */
 TEST(PathPlanningTest, linearPathGeneratorTest) {
   ros::NodeHandle nh;
 

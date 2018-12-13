@@ -24,12 +24,12 @@
  */
 
 /**
- *@file PathPlanning.h
- *@author Saimouli Katragadda
- *@author Saurav Kumar
- *@copyright MIT License
- *@brief PathPlanning class declaration
- *Declares functions to publish spiral trajectories
+ *@file           PathPlanning.h
+ *@author         Saimouli Katragadda
+ *@author         Saurav Kumar
+ *@copyright      MIT License
+ *@brief          PathPlanning class declaration
+ *                Declares functions to publish spiral trajectories
  */
 
 #ifndef INCLUDE_FRONTIER_EXPLORATION_TURTLEBOT_PATHPLANNING_H_

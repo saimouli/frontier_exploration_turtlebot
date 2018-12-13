@@ -22,6 +22,13 @@
  *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  *  DEALINGS IN THE SOFTWARE.
  */
+/**
+ *@file           CollisionDetectorTest.cpp
+ *@author         Saimouli Katragadda
+ *@author         Saurav Kumar
+ *@copyright      MIT License
+ *@brief          Tests the collisionDetector class methods
+ */
 
 #include <ros/ros.h>
 #include <sensor_msgs/LaserScan.h>
@@ -29,12 +36,11 @@
 #include <gtest/gtest.h>
 #include <iostream>
 
-/*
- *
- * @brief      Tests whether laserCallback method of the class CollisionDetector
- *
+/**
+ * @brief      Tests constructor of the class CollisionDetector
  * @param      CollisionDetectorTest     gtest framework
  * @param      CollisionDetectorTest     Name of the test
+ * @return     none
  */
 
 TEST(CollisionDetectorTest, CollisionDetectorTest) {
@@ -44,10 +50,10 @@ TEST(CollisionDetectorTest, CollisionDetectorTest) {
 }
 
 /**
- * @brief      Tests whether distanceCallback method of the class CollisionDetector
- *
+ * @brief      Tests laserCallback method of the class CollisionDetector
  * @param      CollisionDetectorTest     gtest framework
  * @param      distanceCallbackTest      Name of the test
+ * @return     none
  */
 TEST(CollisionDetectorTest, laserCallbackTest) {
   CollisionDetector collisionTest;

@@ -24,11 +24,11 @@
  */
 
 /**
- *@file CollisionDetector.cpp
- *@author Saimouli Katragadda
- *@author Saurav Kumar
- *@copyright MIT License
- *@brief implements the collisionDetector class methods
+ *@file           CollisionDetector.cpp
+ *@author         Saimouli Katragadda
+ *@author         Saurav Kumar
+ *@copyright      MIT License
+ *@brief          implements the collisionDetector class methods
  */
 
 #include <ros/ros.h>
@@ -39,11 +39,7 @@
 
 CollisionDetector::CollisionDetector() {
   ROS_INFO("Initializing Collision Detection!");
-
   CollisionFlag = 0;
-
-  //  sub = nh.subscribe<sensor_msgs::LaserScan>("/scan", 50,
-  //        &CollisionDetector::laserCallback, this);
 }
 
 CollisionDetector::~CollisionDetector() {
@@ -51,12 +47,11 @@ CollisionDetector::~CollisionDetector() {
 
 void CollisionDetector::laserCallback(
     const sensor_msgs::LaserScan::ConstPtr& msg) {
-
+  //  stores the LaserScan range data in vector
   std::vector<float> msgstore = msg->ranges;
   int countInd = 0;
 
   for (auto i : msgstore) {
-    //  ROS_INFO_STREAM("new auto: "<< i);
     int a = std::isinf(i);
     if (a == 1) {
       // Replacing values in Inf values with max value 0.5
@@ -64,14 +59,6 @@ void CollisionDetector::laserCallback(
     }
     countInd++;
   }
-
-// Replacing values in Inf values with max value 0.5
-  // for (int i = 0; i <= 359; i++) {
-  //   int a = std::isinf(msgstore[i]);
-  //     if (a == 1) {
-  //      msgstore[i] = 0.5;
-  //      }
-  // }
 
   double sumq1 = 0, sumq2 = 0;
   int counter = 0;
@@ -92,24 +79,6 @@ void CollisionDetector::laserCallback(
   }
   ROS_INFO_STREAM("Front area: " << sumq1);
   ROS_INFO_STREAM("Rear area: " << sumq2);
-
-//   sumq1 = 0, sumq2 = 0;
-//   for (int i = 0; i <= 359; i++) {
-// //  ROS_INFO_STREAM(i);
-//     if (msgstore[i] >= 0 && msgstore[i] <= 0.5) {
-//       if (i >= 0 & i < 45) {
-//         sumq1 = sumq1 + msgstore[i];
-//       }
-//       if (i >=315 & i <=359) {
-//               sumq1 = sumq1 + msgstore[i];
-//             }
-//       if (i >= 135 & i< 225) {
-//         sumq2 = sumq2 + msgstore[i];
-//       }
-//     }
-//   }
-//   ROS_INFO_STREAM("Front area : " << sumq1);
-//   ROS_INFO_STREAM("Rear area : " << sumq2);
 
   double minelement = std::min(sumq1, sumq2);
   if (minelement == sumq1) {

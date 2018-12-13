@@ -24,11 +24,11 @@
  */
 
 /**
- *@file main.cpp
- *@author Saimouli Katragadda
- *@author Saurav Kumar
- *@copyright MIT License
- *@brief main function
+ *@file         main.cpp
+ *@author       Saimouli Katragadda
+ *@author       Saurav Kumar
+ *@copyright    MIT License
+ *@brief        main function
  */
 
 #include <ros/ros.h>
@@ -43,7 +43,7 @@
  * @return     int of value zero
  */
 int main(int argc, char* argv[]) {
-// Initialize the ros node
+  // Initialize the ros node
   ros::init(argc, argv, "frontierExplorer");
 
   int userChoice;
@@ -55,8 +55,7 @@ int main(int argc, char* argv[]) {
       << "Would you like to take linear path (0) or spiral path finder (1)?"
       " (Enter 0 or 1): ";
   std::cin >> userChoice;
-
-// Create the PathPlanning object
+  // Create the PathPlanning object
   PathPlanning pathPlanning;
 
   if (userChoice == 0) {
