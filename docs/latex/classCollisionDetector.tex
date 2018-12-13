@@ -1,0 +1,172 @@
+\hypertarget{classCollisionDetector}{}\section{Collision\+Detector Class Reference}
+\label{classCollisionDetector}\index{Collision\+Detector@{Collision\+Detector}}
+
+
+class to find the the presence of the obstacle and to distinguish the position of the obstance in the front or rear of the turtlebot  
+
+
+
+
+{\ttfamily \#include $<$Collision\+Detector.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCollisionDetector_ab3f66bd8d272a21674e38bf46d4d31e0}{Collision\+Detector} ()
+\begin{DoxyCompactList}\small\item\em constructor \hyperlink{classCollisionDetector}{Collision\+Detector} class initializes values of Collision\+Flag to 0 \end{DoxyCompactList}\item 
+\hyperlink{classCollisionDetector_a1a0f7a386920e0cf83a101be92f04598}{$\sim$\+Collision\+Detector} ()
+\begin{DoxyCompactList}\small\item\em destructor \hyperlink{classCollisionDetector}{Collision\+Detector} class destroys \hyperlink{classCollisionDetector}{Collision\+Detector} class objects when it goes out of scope. \end{DoxyCompactList}\item 
+void \hyperlink{classCollisionDetector_af960b1e537e227487ee117d17be962c6}{laser\+Callback} (const sensor\+\_\+msgs\+::\+Laser\+Scan\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em laser callback function\+Check \+:A call back function to read laserscan data and checks if the obstacle is within the vicinity of the robot and sets the Collision\+Flag(0,1,2) based on the position of the object \end{DoxyCompactList}\item 
+int \hyperlink{classCollisionDetector_a04d7a0db86d2023cbc196fa0831f6dba}{check\+Obstacles} ()
+\begin{DoxyCompactList}\small\item\em returns the value stored in Collision\+Flag \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classCollisionDetector_a9222efa13cfe6db4d1bbbc57e18a9d1e}{Collision\+Flag}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+class to find the the presence of the obstacle and to distinguish the position of the obstance in the front or rear of the turtlebot 
+
+Definition at line 46 of file Collision\+Detector.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Collision\+Detector@{Collision\+Detector}!Collision\+Detector@{Collision\+Detector}}
+\index{Collision\+Detector@{Collision\+Detector}!Collision\+Detector@{Collision\+Detector}}
+\subsubsection[{\texorpdfstring{Collision\+Detector()}{CollisionDetector()}}]{\setlength{\rightskip}{0pt plus 5cm}Collision\+Detector\+::\+Collision\+Detector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classCollisionDetector_ab3f66bd8d272a21674e38bf46d4d31e0}{}\label{classCollisionDetector_ab3f66bd8d272a21674e38bf46d4d31e0}
+
+
+constructor \hyperlink{classCollisionDetector}{Collision\+Detector} class initializes values of Collision\+Flag to 0 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+
+
+Definition at line 40 of file Collision\+Detector.\+cpp.
+
+
+
+References Collision\+Flag.
+
+\index{Collision\+Detector@{Collision\+Detector}!````~Collision\+Detector@{$\sim$\+Collision\+Detector}}
+\index{````~Collision\+Detector@{$\sim$\+Collision\+Detector}!Collision\+Detector@{Collision\+Detector}}
+\subsubsection[{\texorpdfstring{$\sim$\+Collision\+Detector()}{~CollisionDetector()}}]{\setlength{\rightskip}{0pt plus 5cm}Collision\+Detector\+::$\sim$\+Collision\+Detector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classCollisionDetector_a1a0f7a386920e0cf83a101be92f04598}{}\label{classCollisionDetector_a1a0f7a386920e0cf83a101be92f04598}
+
+
+destructor \hyperlink{classCollisionDetector}{Collision\+Detector} class destroys \hyperlink{classCollisionDetector}{Collision\+Detector} class objects when it goes out of scope. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+
+
+Definition at line 45 of file Collision\+Detector.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Collision\+Detector@{Collision\+Detector}!check\+Obstacles@{check\+Obstacles}}
+\index{check\+Obstacles@{check\+Obstacles}!Collision\+Detector@{Collision\+Detector}}
+\subsubsection[{\texorpdfstring{check\+Obstacles()}{checkObstacles()}}]{\setlength{\rightskip}{0pt plus 5cm}int Collision\+Detector\+::check\+Obstacles (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classCollisionDetector_a04d7a0db86d2023cbc196fa0831f6dba}{}\label{classCollisionDetector_a04d7a0db86d2023cbc196fa0831f6dba}
+
+
+returns the value stored in Collision\+Flag 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+
+
+Definition at line 95 of file Collision\+Detector.\+cpp.
+
+
+
+References Collision\+Flag.
+
+
+
+Referenced by Path\+Planning\+::linear\+Path\+Generator(), Path\+Planning\+::spiral\+Path\+Generator(), and T\+E\+S\+T().
+
+\index{Collision\+Detector@{Collision\+Detector}!laser\+Callback@{laser\+Callback}}
+\index{laser\+Callback@{laser\+Callback}!Collision\+Detector@{Collision\+Detector}}
+\subsubsection[{\texorpdfstring{laser\+Callback(const sensor\+\_\+msgs\+::\+Laser\+Scan\+::\+Const\+Ptr \&msg)}{laserCallback(const sensor_msgs::LaserScan::ConstPtr &msg)}}]{\setlength{\rightskip}{0pt plus 5cm}void Collision\+Detector\+::laser\+Callback (
+\begin{DoxyParamCaption}
+\item[{const sensor\+\_\+msgs\+::\+Laser\+Scan\+::\+Const\+Ptr \&}]{msg}
+\end{DoxyParamCaption}
+)}\hypertarget{classCollisionDetector_af960b1e537e227487ee117d17be962c6}{}\label{classCollisionDetector_af960b1e537e227487ee117d17be962c6}
+
+
+laser callback function\+Check \+:A call back function to read laserscan data and checks if the obstacle is within the vicinity of the robot and sets the Collision\+Flag(0,1,2) based on the position of the object 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & of type sensor\+\_\+msgs\+::\+Laser\+Scan \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+
+
+Definition at line 48 of file Collision\+Detector.\+cpp.
+
+
+
+References Collision\+Flag.
+
+
+
+Referenced by Path\+Planning\+::\+Path\+Planning(), and T\+E\+S\+T().
+
+
+
+\subsection{Member Data Documentation}
+\index{Collision\+Detector@{Collision\+Detector}!Collision\+Flag@{Collision\+Flag}}
+\index{Collision\+Flag@{Collision\+Flag}!Collision\+Detector@{Collision\+Detector}}
+\subsubsection[{\texorpdfstring{Collision\+Flag}{CollisionFlag}}]{\setlength{\rightskip}{0pt plus 5cm}int Collision\+Detector\+::\+Collision\+Flag\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCollisionDetector_a9222efa13cfe6db4d1bbbc57e18a9d1e}{}\label{classCollisionDetector_a9222efa13cfe6db4d1bbbc57e18a9d1e}
+
+
+Definition at line 49 of file Collision\+Detector.\+h.
+
+
+
+Referenced by check\+Obstacles(), Collision\+Detector(), and laser\+Callback().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/saurav/ros\+\_\+workspace/src/frontier\+\_\+exploration\+\_\+turtlebot/include/frontier\+\_\+exploration\+\_\+turtlebot/\hyperlink{CollisionDetector_8h}{Collision\+Detector.\+h}\item 
+/home/saurav/ros\+\_\+workspace/src/frontier\+\_\+exploration\+\_\+turtlebot/src/\hyperlink{CollisionDetector_8cpp}{Collision\+Detector.\+cpp}\end{DoxyCompactItemize}

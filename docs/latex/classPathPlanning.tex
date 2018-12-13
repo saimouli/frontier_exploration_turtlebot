@@ -1,0 +1,289 @@
+\hypertarget{classPathPlanning}{}\section{Path\+Planning Class Reference}
+\label{classPathPlanning}\index{Path\+Planning@{Path\+Planning}}
+
+
+\hyperlink{classPathPlanning}{Path\+Planning} Class class to publish spiral trajectories and linear trajectories and kicks in the colloision avoiding algorithm when required.  
+
+
+
+
+{\ttfamily \#include $<$Path\+Planning.\+h$>$}
+
+
+
+Collaboration diagram for Path\+Planning\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{classPathPlanning__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPathPlanning_a314735f239a01515a3450205dd144619}{Path\+Planning} ()
+\begin{DoxyCompactList}\small\item\em constructor \hyperlink{classPathPlanning}{Path\+Planning} class \end{DoxyCompactList}\item 
+\hyperlink{classPathPlanning_ab1f231c8ce62aac1f2e9743aa85ba940}{$\sim$\+Path\+Planning} ()
+\begin{DoxyCompactList}\small\item\em destructor \hyperlink{classPathPlanning}{Path\+Planning} class \end{DoxyCompactList}\item 
+void \hyperlink{classPathPlanning_ab096aae6f4a9636d60f3acdc582a6e4a}{spiral\+Path\+Generator} ()
+\begin{DoxyCompactList}\small\item\em spiral generator function \end{DoxyCompactList}\item 
+void \hyperlink{classPathPlanning_ac8bdfa5f35d5819bd7981e15b95c637b}{linear\+Path\+Generator} ()
+\begin{DoxyCompactList}\small\item\em linear generator function \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCollisionDetector}{Collision\+Detector} \hyperlink{classPathPlanning_a698ed28a6ed1408f311af37170a180a2}{collisiondetector}
+\item 
+int \hyperlink{classPathPlanning_a8ffa246d97c8d79cb18a1fd61e805467}{count}
+\item 
+int \hyperlink{classPathPlanning_a1346e45eb6566236a55b666e350cb62b}{Max\+Count}
+\item 
+float \hyperlink{classPathPlanning_a88e654d2dffefce6b3253dca0d05af2c}{linear\+Speed}
+\item 
+float \hyperlink{classPathPlanning_aaa87b2917fd4cc8705601b037458dbec}{angular\+Speed}
+\item 
+geometry\+\_\+msgs\+::\+Twist \hyperlink{classPathPlanning_adc9393eeed2386dd694935a241d61dc2}{msg}
+\item 
+ros\+::\+Publisher \hyperlink{classPathPlanning_a95ffa20c78692b3af113a52f37607f23}{pub\+Vel}
+\item 
+ros\+::\+Node\+Handle \hyperlink{classPathPlanning_a1835423557580f21ff1d569e892cc0d5}{nh}
+\item 
+ros\+::\+Subscriber \hyperlink{classPathPlanning_ad30204ed2c193139c5d5b3f8ed07bc8d}{sub}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classPathPlanning}{Path\+Planning} Class class to publish spiral trajectories and linear trajectories and kicks in the colloision avoiding algorithm when required. 
+
+Definition at line 47 of file Path\+Planning.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Path\+Planning@{Path\+Planning}!Path\+Planning@{Path\+Planning}}
+\index{Path\+Planning@{Path\+Planning}!Path\+Planning@{Path\+Planning}}
+\subsubsection[{\texorpdfstring{Path\+Planning()}{PathPlanning()}}]{\setlength{\rightskip}{0pt plus 5cm}Path\+Planning\+::\+Path\+Planning (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPathPlanning_a314735f239a01515a3450205dd144619}{}\label{classPathPlanning_a314735f239a01515a3450205dd144619}
+
+
+constructor \hyperlink{classPathPlanning}{Path\+Planning} class 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none initializes values of count, Max\+Count, linear\+Speed, angular\+Speec and initializes subscribers and publishers 
+\end{DoxyReturn}
+
+
+Definition at line 39 of file Path\+Planning.\+cpp.
+
+
+
+References angular\+Speed, collisiondetector, count, Collision\+Detector\+::laser\+Callback(), linear\+Speed, Max\+Count, msg, nh, pub\+Vel, and sub.
+
+\index{Path\+Planning@{Path\+Planning}!````~Path\+Planning@{$\sim$\+Path\+Planning}}
+\index{````~Path\+Planning@{$\sim$\+Path\+Planning}!Path\+Planning@{Path\+Planning}}
+\subsubsection[{\texorpdfstring{$\sim$\+Path\+Planning()}{~PathPlanning()}}]{\setlength{\rightskip}{0pt plus 5cm}Path\+Planning\+::$\sim$\+Path\+Planning (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPathPlanning_ab1f231c8ce62aac1f2e9743aa85ba940}{}\label{classPathPlanning_ab1f231c8ce62aac1f2e9743aa85ba940}
+
+
+destructor \hyperlink{classPathPlanning}{Path\+Planning} class 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none destroys \hyperlink{classPathPlanning}{Path\+Planning} class objects when it goes out of scope. 
+\end{DoxyReturn}
+
+
+Definition at line 63 of file Path\+Planning.\+cpp.
+
+
+
+References msg, and pub\+Vel.
+
+
+
+\subsection{Member Function Documentation}
+\index{Path\+Planning@{Path\+Planning}!linear\+Path\+Generator@{linear\+Path\+Generator}}
+\index{linear\+Path\+Generator@{linear\+Path\+Generator}!Path\+Planning@{Path\+Planning}}
+\subsubsection[{\texorpdfstring{linear\+Path\+Generator()}{linearPathGenerator()}}]{\setlength{\rightskip}{0pt plus 5cm}void Path\+Planning\+::linear\+Path\+Generator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPathPlanning_ac8bdfa5f35d5819bd7981e15b95c637b}{}\label{classPathPlanning_ac8bdfa5f35d5819bd7981e15b95c637b}
+
+
+linear generator function 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none generates linear trajectories and publishes them 
+\end{DoxyReturn}
+
+
+Definition at line 74 of file Path\+Planning.\+cpp.
+
+
+
+References angular\+Speed, Collision\+Detector\+::check\+Obstacles(), collisiondetector, linear\+Speed, msg, and pub\+Vel.
+
+
+
+Referenced by main(), and T\+E\+S\+T().
+
+\index{Path\+Planning@{Path\+Planning}!spiral\+Path\+Generator@{spiral\+Path\+Generator}}
+\index{spiral\+Path\+Generator@{spiral\+Path\+Generator}!Path\+Planning@{Path\+Planning}}
+\subsubsection[{\texorpdfstring{spiral\+Path\+Generator()}{spiralPathGenerator()}}]{\setlength{\rightskip}{0pt plus 5cm}void Path\+Planning\+::spiral\+Path\+Generator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPathPlanning_ab096aae6f4a9636d60f3acdc582a6e4a}{}\label{classPathPlanning_ab096aae6f4a9636d60f3acdc582a6e4a}
+
+
+spiral generator function 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none generates spiral trajectories and publishes them 
+\end{DoxyReturn}
+
+
+Definition at line 97 of file Path\+Planning.\+cpp.
+
+
+
+References angular\+Speed, Collision\+Detector\+::check\+Obstacles(), collisiondetector, count, linear\+Speed, Max\+Count, msg, and pub\+Vel.
+
+
+
+Referenced by main(), and T\+E\+S\+T().
+
+
+
+\subsection{Member Data Documentation}
+\index{Path\+Planning@{Path\+Planning}!angular\+Speed@{angular\+Speed}}
+\index{angular\+Speed@{angular\+Speed}!Path\+Planning@{Path\+Planning}}
+\subsubsection[{\texorpdfstring{angular\+Speed}{angularSpeed}}]{\setlength{\rightskip}{0pt plus 5cm}float Path\+Planning\+::angular\+Speed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPathPlanning_aaa87b2917fd4cc8705601b037458dbec}{}\label{classPathPlanning_aaa87b2917fd4cc8705601b037458dbec}
+
+
+Definition at line 58 of file Path\+Planning.\+h.
+
+
+
+Referenced by linear\+Path\+Generator(), Path\+Planning(), and spiral\+Path\+Generator().
+
+\index{Path\+Planning@{Path\+Planning}!collisiondetector@{collisiondetector}}
+\index{collisiondetector@{collisiondetector}!Path\+Planning@{Path\+Planning}}
+\subsubsection[{\texorpdfstring{collisiondetector}{collisiondetector}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Collision\+Detector} Path\+Planning\+::collisiondetector\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPathPlanning_a698ed28a6ed1408f311af37170a180a2}{}\label{classPathPlanning_a698ed28a6ed1408f311af37170a180a2}
+
+
+Definition at line 50 of file Path\+Planning.\+h.
+
+
+
+Referenced by linear\+Path\+Generator(), Path\+Planning(), and spiral\+Path\+Generator().
+
+\index{Path\+Planning@{Path\+Planning}!count@{count}}
+\index{count@{count}!Path\+Planning@{Path\+Planning}}
+\subsubsection[{\texorpdfstring{count}{count}}]{\setlength{\rightskip}{0pt plus 5cm}int Path\+Planning\+::count\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPathPlanning_a8ffa246d97c8d79cb18a1fd61e805467}{}\label{classPathPlanning_a8ffa246d97c8d79cb18a1fd61e805467}
+
+
+Definition at line 52 of file Path\+Planning.\+h.
+
+
+
+Referenced by Path\+Planning(), and spiral\+Path\+Generator().
+
+\index{Path\+Planning@{Path\+Planning}!linear\+Speed@{linear\+Speed}}
+\index{linear\+Speed@{linear\+Speed}!Path\+Planning@{Path\+Planning}}
+\subsubsection[{\texorpdfstring{linear\+Speed}{linearSpeed}}]{\setlength{\rightskip}{0pt plus 5cm}float Path\+Planning\+::linear\+Speed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPathPlanning_a88e654d2dffefce6b3253dca0d05af2c}{}\label{classPathPlanning_a88e654d2dffefce6b3253dca0d05af2c}
+
+
+Definition at line 56 of file Path\+Planning.\+h.
+
+
+
+Referenced by linear\+Path\+Generator(), Path\+Planning(), and spiral\+Path\+Generator().
+
+\index{Path\+Planning@{Path\+Planning}!Max\+Count@{Max\+Count}}
+\index{Max\+Count@{Max\+Count}!Path\+Planning@{Path\+Planning}}
+\subsubsection[{\texorpdfstring{Max\+Count}{MaxCount}}]{\setlength{\rightskip}{0pt plus 5cm}int Path\+Planning\+::\+Max\+Count\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPathPlanning_a1346e45eb6566236a55b666e350cb62b}{}\label{classPathPlanning_a1346e45eb6566236a55b666e350cb62b}
+
+
+Definition at line 54 of file Path\+Planning.\+h.
+
+
+
+Referenced by Path\+Planning(), and spiral\+Path\+Generator().
+
+\index{Path\+Planning@{Path\+Planning}!msg@{msg}}
+\index{msg@{msg}!Path\+Planning@{Path\+Planning}}
+\subsubsection[{\texorpdfstring{msg}{msg}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Twist Path\+Planning\+::msg\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPathPlanning_adc9393eeed2386dd694935a241d61dc2}{}\label{classPathPlanning_adc9393eeed2386dd694935a241d61dc2}
+
+
+Definition at line 60 of file Path\+Planning.\+h.
+
+
+
+Referenced by linear\+Path\+Generator(), Path\+Planning(), spiral\+Path\+Generator(), and $\sim$\+Path\+Planning().
+
+\index{Path\+Planning@{Path\+Planning}!nh@{nh}}
+\index{nh@{nh}!Path\+Planning@{Path\+Planning}}
+\subsubsection[{\texorpdfstring{nh}{nh}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Node\+Handle Path\+Planning\+::nh\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPathPlanning_a1835423557580f21ff1d569e892cc0d5}{}\label{classPathPlanning_a1835423557580f21ff1d569e892cc0d5}
+
+
+Definition at line 64 of file Path\+Planning.\+h.
+
+
+
+Referenced by Path\+Planning().
+
+\index{Path\+Planning@{Path\+Planning}!pub\+Vel@{pub\+Vel}}
+\index{pub\+Vel@{pub\+Vel}!Path\+Planning@{Path\+Planning}}
+\subsubsection[{\texorpdfstring{pub\+Vel}{pubVel}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher Path\+Planning\+::pub\+Vel\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPathPlanning_a95ffa20c78692b3af113a52f37607f23}{}\label{classPathPlanning_a95ffa20c78692b3af113a52f37607f23}
+
+
+Definition at line 62 of file Path\+Planning.\+h.
+
+
+
+Referenced by linear\+Path\+Generator(), Path\+Planning(), spiral\+Path\+Generator(), and $\sim$\+Path\+Planning().
+
+\index{Path\+Planning@{Path\+Planning}!sub@{sub}}
+\index{sub@{sub}!Path\+Planning@{Path\+Planning}}
+\subsubsection[{\texorpdfstring{sub}{sub}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber Path\+Planning\+::sub\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPathPlanning_ad30204ed2c193139c5d5b3f8ed07bc8d}{}\label{classPathPlanning_ad30204ed2c193139c5d5b3f8ed07bc8d}
+
+
+Definition at line 66 of file Path\+Planning.\+h.
+
+
+
+Referenced by Path\+Planning().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/saurav/ros\+\_\+workspace/src/frontier\+\_\+exploration\+\_\+turtlebot/include/frontier\+\_\+exploration\+\_\+turtlebot/\hyperlink{PathPlanning_8h}{Path\+Planning.\+h}\item 
+/home/saurav/ros\+\_\+workspace/src/frontier\+\_\+exploration\+\_\+turtlebot/src/\hyperlink{PathPlanning_8cpp}{Path\+Planning.\+cpp}\end{DoxyCompactItemize}

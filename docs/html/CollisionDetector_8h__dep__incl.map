@@ -1,0 +1,8 @@
+<map id="/home/saurav/ros_workspace/src/frontier_exploration_turtlebot/include/frontier_exploration_turtlebot/CollisionDetector.h" name="/home/saurav/ros_workspace/src/frontier_exploration_turtlebot/include/frontier_exploration_turtlebot/CollisionDetector.h">
+<area shape="rect" id="node2" href="$PathPlanning_8h.html" title="PathPlanning class declaration Declares functions to publish spiral trajectories. ..." alt="" coords="188,124,427,195"/>
+<area shape="rect" id="node3" href="$src_2main_8cpp.html" title="/home/saurav/ros_workspace\l/src/frontier_exploration\l_turtlebot/src/main.cpp" alt="" coords="5,243,199,299"/>
+<area shape="rect" id="node4" href="$PathPlanning_8cpp.html" title="implements the PathPlanning class methods " alt="" coords="223,243,427,299"/>
+<area shape="rect" id="node5" href="$PathPlanningTest_8cpp.html" title="Tests the PathPlanning class methods. " alt="" coords="451,243,686,299"/>
+<area shape="rect" id="node6" href="$CollisionDetector_8cpp.html" title="implements the collisionDetector class methods " alt="" coords="553,131,779,187"/>
+<area shape="rect" id="node7" href="$CollisionDetectorTest_8cpp.html" title="Tests the collisionDetector class methods. " alt="" coords="804,131,1061,187"/>
+</map>
