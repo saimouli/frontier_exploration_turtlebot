@@ -71,6 +71,9 @@ The Sprint Planning and review can be accessed [here](https://docs.google.com/do
 Saimouli Katragadda and Saurav Kumar worked together on this implementation and alternate commits were made. The commits are made by the driver while the other person acted as navigator.
 
 # <a name="present"></a> Presentation Slides 
+Link to the video can be found [here](https://youtu.be/45f4QF6Crtc)
+
+
 Link to the sildes can be found [here](https://docs.google.com/presentation/d/1LBri_mfvDsKqvUMGZ5PVOpgEUb53M30awwxja8da1Mo/edit?usp=sharing)
 
 # <a name="dependencies"></a> Dependencies
@@ -108,7 +111,7 @@ alt="NMPC" width="800" height="400" border="10" />
 </p>
 
 # <a name="installdepend"></a> Dependencies Installation
-[A video is created demonstrating the below installation steps] (https://youtu.be/P_-cCO_jp-s)
+[A video is created demonstrating the below installation steps](https://youtu.be/P_-cCO_jp-s)
 
 - ## Turtlebot3 packages installation
 Following section will describe steps necessary to install turtlebot3 dependencies. Alternately you can follow from the
@@ -262,6 +265,14 @@ This will output the coverage of each file in the terminal. To create an html fi
 genhtml coverage.info --output-directory covout
 ```
 This will store the ```index.html``` file in the folder ```covout```
+# <a name="issue"></a>
+# Known Issues
+Navigation: Sometimes when launching the turtlbot3 simulation might get stuck. In that case please relaunch the simulation using the launch file 
+
+While building the slam authors assumed the environment is filled with obstacles. If there is an empty room the built slam map will not be a good estimate. 
+
+If the user chooses a spiral trajectory generator, the map will build sooner but might also distort because of too many rotations involved. The 2d slam methods are bad as they drift a lot. In the next version, authors are trying to integrate RGBD slam. 
+
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbLTcwMTQ4NTc3NCwtMTY0MzUyMTc2MSwtMj
 k5NjIxNDM4LDE2Mjg2MTE3MTRdfQ==
