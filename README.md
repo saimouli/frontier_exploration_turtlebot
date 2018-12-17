@@ -253,6 +253,17 @@ doxywizard
 ```
 When doxywizard is open, select the workspace as the repository. Fill in the details as required and set the source code folder to the repository as well. Create a new folder in the repository and select that as the destination directory. Proceed with the default settings and generate the documentation.
 
+- Alternate way to generate and view doxygen document is as follows:
+```
+cd ~/catkin_ws/src/frontier_explorer_turtlebot/docs
+doxygen explorerdoxy.doxyfile
+cd html
+firefox index.html
+```
+Refer to doxygen document :
+[Doxygen Document](http://htmlpreview.github.io/?https://github.com/saimouli/frontier_exploration_turtlebot/blob/master/docs/html/index.html)
+
+
 # <a name="coverage"></a> Coverage
 - The current code coverage for the project is 92.0%.
 ```
