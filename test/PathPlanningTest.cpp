@@ -68,10 +68,11 @@ TEST(PathPlanningTest, InitializationErrorTest) {
  * @return     none
  */
 TEST(PathPlanningTest, spiralPathGeneratorTest) {
+  // created NodeHandle nh
   ros::NodeHandle nh;
-
+  // creating Publisher testpub to publish laser msg to sca topic
   ros::Publisher testPub = nh.advertise<sensor_msgs::LaserScan>("/scan", 50);
-
+  //  creating  a laserData msg tpe
   sensor_msgs::LaserScan laserData;
   laserData.angle_min = -0.52;
   laserData.angle_max = 0.52;
@@ -82,27 +83,33 @@ TEST(PathPlanningTest, spiralPathGeneratorTest) {
   laserData.ranges.resize(50);
   laserData.intensities.resize(50);
 
+  // initialize all the range of laserData to zero
   for (auto& i : laserData.ranges) {
     i = 0.0;
   }
 
   PathPlanning planner;
-
+  // creating Subscriber testsub  subscribing to scan topic
+  // and calling lasercallback function of CollisionDetector class
   ros::Subscriber testSub = nh.subscribe<geometry_msgs::Twist>("/cmd_vel", 50,
                                                                testCallback);
 
   int counter = 0;
 
   while (ros::ok()) {
+    // publish the laserData
     testPub.publish(laserData);
+    // activate the spiral generator method
     planner.spiralPathGenerator();
-
+    // break the loop after three iterations
     if (counter == 3) {
       break;
     }
     ros::spinOnce();
     counter++;
   }
+  // check to see if the linear velocity is what we expect it to be for
+  // the laser data
   EXPECT_NEAR(0.2, linX, 0.1);
   EXPECT_EQ(0.0, angZ);
 }
@@ -115,9 +122,9 @@ TEST(PathPlanningTest, spiralPathGeneratorTest) {
  */
 TEST(PathPlanningTest, linearPathGeneratorTest) {
   ros::NodeHandle nh;
-
+  // create a publisher to publish the laserscan topic
   ros::Publisher testPub = nh.advertise<sensor_msgs::LaserScan>("/scan", 50);
-
+  //  create a laserData msg for testing purpose
   sensor_msgs::LaserScan laserData;
   laserData.angle_min = -0.52;
   laserData.angle_max = 0.52;
@@ -128,28 +135,34 @@ TEST(PathPlanningTest, linearPathGeneratorTest) {
   laserData.ranges.resize(50);
   laserData.intensities.resize(50);
 
+  // fill range vector to zeros
   for (auto& i : laserData.ranges) {
     i = 0.0;
   }
 
+  // initializing planner object
   PathPlanning planner;
-
+  // creating Subscriber testsub  subscribing to cmd_vel topic
+  // and calling lasercallback function of CollisionDetector class
   ros::Subscriber testSub = nh.subscribe<geometry_msgs::Twist>("/cmd_vel", 50,
                                                                testCallback);
 
   int counter = 0;
 
   while (ros::ok()) {
+    // publish the test laser data
     testPub.publish(laserData);
     planner.linearPathGenerator();
 
+    // break the loop after three iterations
     if (counter == 3) {
       break;
     }
     ros::spinOnce();
     counter++;
   }
-
+  // check to see if the linear velocity is what we expect it to be for
+  // the laser data
   EXPECT_NEAR(0.2, linX, 0.1);
   EXPECT_EQ(0.0, angZ);
 }
