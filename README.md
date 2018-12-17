@@ -6,7 +6,7 @@ Table Contents:
 - [Overview](#overview)
 - [Licence](#licence)
 - [Product Backlog and Sprint Schedule](#sip_process)
-- [Presentation Slides](#present)
+- [Presentation](#present)
 - [Dependencies](#dependencies)
 - [Algorithm Overview](#algorithm)
 - [Results](#results)
@@ -70,11 +70,13 @@ The Sprint Planning and review can be accessed [here](https://docs.google.com/do
 
 Saimouli Katragadda and Saurav Kumar worked together on this implementation and alternate commits were made. The commits are made by the driver while the other person acted as navigator.
 
-# <a name="present"></a> Presentation Slides 
+# <a name="present"></a> Presentation
 Link to the video can be found [here](https://youtu.be/45f4QF6Crtc)
 
 
 Link to the sildes can be found [here](https://docs.google.com/presentation/d/1LBri_mfvDsKqvUMGZ5PVOpgEUb53M30awwxja8da1Mo/edit?usp=sharing)
+
+[Dependencies Installation steps](https://youtu.be/P_-cCO_jp-s)
 
 # <a name="dependencies"></a> Dependencies
 This project uses the following packages:
@@ -99,7 +101,7 @@ This project uses the following packages:
 There are two path planning generators called   ```Linear Path Generator``` and ```Spiral Path Generator``` to generate the motion of the turtlebot in the simulated obstacle free environment. The ```Linear Path Generator``` generates a linear path for the turtlebot in the collision free area. Whereas, the later generates discrete spiral path. ```CollisionDetecter``` overrides ```Linear Path Generator``` and ```Spiral Path Generator``` whenever an object is in the vicinity of the turtlebot.
 
 
-The ```CollisionDetecter``` algorithm divides the vicinity of the turtelbot into two areas : ```Front``` & ```Rear```. It then compares the obstacles in these two vicinities and make a decision either to move forward or to rotate. <TODDO: elaborate the algorithm>
+The ```CollisionDetecter``` algorithm divides the vicinity of the turtelbot into two areas : ```Front``` & ```Rear```. It then compares the obstacles in these two vicinities and make a decision either to move forward or to rotate. 
 
 The ```Linear Path Generator``` or ```Spiral Path Generator``` kicks in back once both of the vicinities are obstacle free.
 
